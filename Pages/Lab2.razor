@@ -50,24 +50,24 @@
 
 </EditForm>
 
-<p>@Lab2_Classes.TestComplex.Test(complex1 + complex2, expected, "Addition")</p>
-<p>@Lab2_Classes.TestComplex.Test(complex1 - complex2, expected, "Subtraction")</p>
-<p>@Lab2_Classes.TestComplex.Test(complex1 * complex2, expected, "Multiplication")</p>
-<p>@Lab2_Classes.TestComplex.Test(complex1 / complex2, expected, "Division")</p>
-<p>@Lab2_Classes.TestComplex.Test(-complex1, expected, "Negative")</p>
-<p>@Lab2_Classes.TestComplex.Test(complex1.conjugate(), expected, "Conjugate")</p>
+<p>@TestComplex.Test(complex1 + complex2, expected, "Addition")</p>
+<p>@TestComplex.Test(complex1 - complex2, expected, "Subtraction")</p>
+<p>@TestComplex.Test(complex1 * complex2, expected, "Multiplication")</p>
+<p>@TestComplex.Test(complex1 / complex2, expected, "Division")</p>
+<p>@TestComplex.Test(-complex1, expected, "Negative")</p>
+<p>@TestComplex.Test(complex1.conjugate(), expected, "Conjugate")</p>
 <p>Modus: @complex1.modus()</p>
 <p>Argument: @complex1.argument()</p>
 <p>Equals: @((complex1 == complex2) ? true : false)</p>
 <p>Not equals: @((complex1 != complex2) ? true : false)</p>
 
 
-@code {
+    @code {
 
-    Lab2_Classes.TestComplex test = new Lab2_Classes.TestComplex();
+        TestComplex test = new TestComplex();
 
-    Lab2_Classes.Complex complex1 = new Lab2_Classes.Complex();
-    Lab2_Classes.Complex complex2 = new Lab2_Classes.Complex();
-    Lab2_Classes.Complex expected = new Lab2_Classes.Complex();
-}
+        Complex complex1 = new Complex();
+        Complex complex2 = new Complex();
+        Complex expected = new Complex();
+    }
 

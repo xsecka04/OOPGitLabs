@@ -3,8 +3,8 @@ namespace OOPGitLabs.Pages.Lab2_Classes
 {
     public class Complex
     {
-        public double Realna;
-        public double Imaginarni;
+        public double Realna { get; set; }
+        public double Imaginarni { get; set; }
 
         public Complex() { }
         public Complex(double re, double im)
@@ -60,7 +60,7 @@ namespace OOPGitLabs.Pages.Lab2_Classes
 
         public double argument()
         {
-            return Math.Sqrt(this.Realna * this.Realna + this.Imaginarni * this.Imaginarni);
+            return Math.Atan2(this.Imaginarni, this.Realna);
         }
 
         public override string ToString()
