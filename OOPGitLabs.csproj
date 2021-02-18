@@ -10,4 +10,7 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Lab2_Classes\" />
+  </ItemGroup>
 </Project>
