@@ -37,10 +37,10 @@
 
 </EditForm>
 
-<p>Addition: @((Model.ma1 + Model.ma2).ToString())</p>
-<p>Subtraction: @((Model.ma1- Model.ma2).ToString())</p>
-<p>Multiplication: @((Model.ma1* Model.ma2).ToString())</p>
-<p>Negative: @((-Model.ma1).ToString())</p>
+<p>Addition: @((MarkupString)(Model.ma1 + Model.ma2).ToString())</p>
+<p>Subtraction: @((MarkupString)(Model.ma1- Model.ma2).ToString())</p>
+<p>Multiplication: @((MarkupString)(Model.ma1* Model.ma2).ToString())</p>
+<p>Negative: @((MarkupString)(-Model.ma1).ToString())</p>
 <p>Determinant: @(Model.ma1.Determinant())</p>
 <p>Is Equal: @((Model.ma1 == Model.ma2) ? true : false)</p>
 <p>Is Not Equal: @((Model.ma1 != Model.ma2) ? true : false)</p>
@@ -50,7 +50,6 @@
 
 @code {
     MatrixModel Model = new MatrixModel();
-
 
     class MatrixModel
     {

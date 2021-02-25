@@ -38,14 +38,16 @@ namespace OOPGitLabs.Pages.Lab3_Classes
         {
             try
             {
-                int NewX = (first.XLen >= sec.XLen) ? first.XLen : sec.XLen;
-                int NewY = (first.YLen >= sec.YLen) ? first.YLen : sec.YLen;
-
-                double[,] NewData = new double[NewX, NewY];
-
-                for (int x = 0; x < NewX; x += 1)
+                if ((first.XLen != sec.XLen || first.YLen != sec.YLen))
                 {
-                    for (int y = 0; y < NewY; y += 1)
+                    throw new Exception();
+                }
+
+                double[,] NewData = new double[first.XLen, first.YLen];
+
+                for (int x = 0; x < first.XLen; x++)
+                {
+                    for (int y = 0; y < first.YLen; y++)
                     {
                         NewData[x, y] = first.Data[x, y] + sec.Data[x, y];
                     }
@@ -63,14 +65,16 @@ namespace OOPGitLabs.Pages.Lab3_Classes
             try
             {
 
-                int NewX = (first.XLen >= sec.XLen) ? first.XLen : sec.XLen;
-                int NewY = (first.YLen >= sec.YLen) ? first.YLen : sec.YLen;
-
-                double[,] NewData = new double[NewX, NewY];
-
-                for (int x = 0; x < NewX; x += 1)
+                if ((first.XLen != sec.XLen || first.YLen != sec.YLen))
                 {
-                    for (int y = 0; y < NewY; y += 1)
+                    throw new Exception();
+                }
+
+                double[,] NewData = new double[first.XLen, first.YLen];
+
+                for (int x = 0; x < first.XLen; x += 1)
+                {
+                    for (int y = 0; y < first.YLen; y += 1)
                     {
                         NewData[x, y] = first.Data[x, y] - sec.Data[x, y];
                     }
@@ -193,7 +197,7 @@ namespace OOPGitLabs.Pages.Lab3_Classes
 
         public override string ToString()
         {
-            string output = "";
+            string output = "<br />";
 
             for (int i = 0; i < XLen; ++i)
             {
@@ -201,7 +205,7 @@ namespace OOPGitLabs.Pages.Lab3_Classes
                 {
                     output += Data[i, j] + "\t";
                 }
-                output += "\n";
+                output += "<br />";
             }
             return output;
         }
