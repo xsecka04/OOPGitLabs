@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,7 +12,23 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div style=" top:30vh; width:30vw; text-align:center; margin:10em auto" class="border border-primary rounded shadow-lg p-3 mb-5 bg-white rounded">
+            <h1 class="display-3">Hi stranger</h1>
+            <p class="lead">I really hope you are from BUT</p>
+            <button class="btn btn-outline-primary shadow-none p-3 mb-5 bg-light rounded" type="button" disabled style="margin:5vW 0">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+
+        </div>
+        <div>
+            <blockquote class="blockquote" style="position:relative; text-align:center; margin:15vw auto">
+                <p class="mb-0">If debugging is the process of removing software bugs, then programming must be the process of putting them in.</p>
+                <footer class="blockquote-footer">Edsger Dijkstra</footer>
+            </blockquote>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
