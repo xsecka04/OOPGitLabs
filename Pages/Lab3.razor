@@ -1,0 +1,108 @@
+﻿@page "/lab3"
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+
+<h3>Lab 3</h3>
+
+<div class="alert alert-primary" role="alert">
+    Separate matrix rows with ; and columns with , eg. 1,1;2,2 
+</div>
+
+
+<EditForm Model="@Model" class="form-horizontal">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">1st Matrix</div>
+        </div>
+        <input @bind="Model.M1" DisplayName="Matrix 1" class="form-control" placeholder="Matrix 1" />
+    </div>
+    <br>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">2nd Matrix</div>
+        </div>
+        <input @bind="Model.M2" DisplayName="Matrix 2" class="form-control" placeholder="Matrix 2" />
+    </div>
+    <br>
+
+</EditForm>
+
+<p>Addition: @((Model.ma1 + Model.ma2).ToString())</p>
+<p>Subtraction: @((Model.ma1- Model.ma2).ToString())</p>
+<p>Multiplication: @((Model.ma1* Model.ma2).ToString())</p>
+<p>Negative: @((-Model.ma1).ToString())</p>
+<p>Determinant: @(Model.ma1.Determinant())</p>
+<p>Is Equal: @((Model.ma1 == Model.ma2) ? true : false)</p>
+<p>Is Not Equal: @((Model.ma1 != Model.ma2) ? true : false)</p>
+
+
+
+
+@code {
+    MatrixModel Model = new MatrixModel();
+
+
+    class MatrixModel
+    {
+
+        public Matrix ma1 = new Matrix();
+        public Matrix ma2 = new Matrix();
+
+        public double[,] ParseString(string S)
+        {
+            string[][] MultiArray = S.Split(';').Select(t => t.Split(',')).ToArray();
+            int dim1 = MultiArray.Length;
+            int dim2 = MultiArray.Select(a => a.Length).Max();
+            double[,] arr = new double[dim1, dim2];
+            for (int i = 0; i < dim1; i++)
+                for (int j = 0; j < MultiArray[i].Length; j++)
+                    arr[i, j] = double.Parse(MultiArray[i][j]);
+            return arr;
+        }
+
+        private string _M1;
+        public string M1
+        {
+            get
+            {
+                return _M1;
+            }
+
+            set
+            {
+                _M1 = value;
+                this.ma1.Data = ParseString(value);
+            }
+        }
+
+        private string _M2;
+        public string M2
+        {
+            get
+            {
+                return _M2;
+            }
+
+            set
+            {
+                _M2 = value;
+                this.ma2.Data = ParseString(value);
+            }
+        }
+
+
+    }
+
+
+}
+

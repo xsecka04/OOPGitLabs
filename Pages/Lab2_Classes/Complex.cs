@@ -40,7 +40,8 @@ namespace OOPGitLabs.Pages.Lab2_Classes
 
         public static Boolean operator !=(Complex first, Complex sec)
         {
-            return (first.Realna == sec.Realna && first.Imaginarni == sec.Imaginarni) ? false : true;
+            return (first == sec) ? false : true;
+            //return (first.Realna == sec.Realna && first.Imaginarni == sec.Imaginarni) ? false : true;
         }
 
         public static Complex operator -(Complex first)
