@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Pages\Lab2_Classes\" />
     <Folder Include="wwwroot\img\" />
+    <Folder Include="Pages\Lab4_Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\GitHub-Mark-32px.png" />

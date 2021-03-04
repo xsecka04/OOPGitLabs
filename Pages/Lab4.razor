@@ -1,0 +1,52 @@
+﻿@page "/lab4"
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+
+<h3>Lab 4</h3>
+
+<EditForm Model="@Model2" class="form-horizontal">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-text">String Input</div>
+        </div>
+        <textarea @bind="Model2.str.Text" class="form-control" rows="6" />
+    </div>
+    <br>
+
+</EditForm>
+
+<p>No of words: @(Model2.str.GetWordCount())</p>
+<p>No of sentences: @(Model2.str.GetSentCount())</p>
+<p>No of lines: @(Model2.str.GetLineCount())</p>
+<p>Most common word used: @(Model2.str.GetMostCommon())</p>
+<p>Longest word used: @(Model2.str.GetLongestWord())</p>
+<p>Shortest word used: @(Model2.str.GetShortestWord())</p>
+<p>Words in alphabetical order: @(Model2.str.GetAlphabeticalOrder())</p>
+
+
+
+
+@code {
+    StringModel Model2 = new StringModel();
+
+
+    class StringModel
+    {
+        public StringStatistics str = new StringStatistics("Toto je retezec predstavovany nekolika radky,\n"
+                 + "ktere jsou od sebe oddeleny znakem LF (Line Feed).\n"
+                 + "Je tu i nejaky ten vykricnik! Pro ucely testovani i otaznik?\n"
+                 + "Toto je jen zkratka zkr. ale ne konec vety. A toto je\n"
+                 + "posledni veta!");
+    }
+}
+
