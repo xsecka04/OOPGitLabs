@@ -8,12 +8,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.31" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\Lab2_Classes\" />
     <Folder Include="wwwroot\img\" />
     <Folder Include="Pages\Lab4_Classes\" />
+    <Folder Include="Pages\Lab5_Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\GitHub-Mark-32px.png" />

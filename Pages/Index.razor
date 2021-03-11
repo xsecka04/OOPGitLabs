@@ -1,6 +1,25 @@
 ﻿@page "/"
 
+@using HtmlAgilityPack
 
 
 <h1>BPC-OOP Odevzdávarna</h1>
 <p>Constantly updated (obviously)</p>
+<br>
+<h5>(WIP)</h5>
+<img src=@XKCDrand asp-append-version="true" />
+
+
+@code{
+
+    //static HtmlWeb web = new HtmlWeb();
+    //static HtmlDocument document = web.Load("https://www.explainxkcd.com/wiki/index.php/Category:Programming");
+    //static HtmlNode node = document.DocumentNode.SelectNodes("//div[@class='mw-category']").First();
+    //static string[] aNodes = node.SelectNodes(".//a").ToArray().Select(w => w.InnerHtml).ToArray();
+    //static string xList = string.Join(", ", aNodes);
+
+    public static string[] XKCDdb = { "tasks", "code_quality", "automation", "exploits_of_a_mom", "real_programmers", "ballmer_peak", "academia_vs_business" };
+
+    string XKCDrand = "https://imgs.xkcd.com/comics/" + XKCDdb[(new Random()).Next(XKCDdb.Length)] + ".png";
+
+}

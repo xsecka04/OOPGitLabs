@@ -1,0 +1,51 @@
+﻿@page "/lab5"
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+
+<h3>Lab 5</h3>
+
+<button class="btn btn-primary" @onclick="CarModel.Nastav">Nastav</button>
+
+<p>@(CarModel.o3.ToString())</p>
+
+<p>@(CarModel.o1.Radio.ToString())</p>
+
+<p>@(CarModel.n1.ToString())</p>
+
+
+@code {
+
+    static class CarModel
+    {
+        public static Osobni o1 = new Osobni(10, Auto.TypPaliva.Benzin, 40);
+        public static Osobni o2 = new Osobni(40, Auto.TypPaliva.Nafta, 10);
+        public static Osobni o3 = new Osobni(60, Auto.TypPaliva.Benzin, 10);
+        public static Nakladni n1 = new Nakladni(10, Auto.TypPaliva.Benzin, 40);
+
+        public static void Nastav()
+        {
+            try
+            {
+                o1.Radio.NastavPredvolbu(2, 84.3);
+                o2.Natankuj(Auto.TypPaliva.Nafta, 10);
+                o3.PrepravovaneOsoby = 10;
+                n1.PrepravovanyNaklad = 30;
+            }
+            catch (Exception ex)
+            {
+                //Blazor WA cannot handle this properly
+            }
+        }
+    }
+}
+
