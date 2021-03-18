@@ -1,0 +1,67 @@
+﻿@page "/lab6"
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+
+<h3>Lab 6</h3>
+
+
+
+
+<ul class="list-group">
+    @foreach (GrObjekt obj in m5.objList)
+    {
+        <li class="list-group-item">@obj.Kresli()</li>
+    }
+</ul>
+
+<div class="alert alert-primary" role="alert">
+    @((MarkupString)m5.CalcTotalArea())
+</div>
+
+@code {
+
+    KresliModel m5 = new KresliModel();
+
+    public class KresliModel
+    {
+
+        public List<GrObjekt> objList = new List<GrObjekt>();
+
+        public KresliModel()
+        {
+            this.objList.Add(new Koule(5));
+            this.objList.Add(new Jehlan(10, 2));
+        }
+
+        public String CalcTotalArea()
+        {
+            double totalArea = 0;
+            double totalVolume = 0;
+            double totalSurface = 0;
+
+            foreach (GrObjekt obj in objList)
+            {
+                if (obj is Objekt2D)
+                    totalArea += ((Objekt2D)obj).SpoctiPlochu();
+                else
+                {
+                    totalVolume += ((Objekt3D)obj).SpoctiObjem();
+                    totalSurface += ((Objekt3D)obj).SpoctiPovrch();
+                }
+            }
+
+            return "Total objects parameters are: <br>Total Area: " + totalArea + "<br>Total Volume: " + totalVolume + "<br>Total Surface: " + totalSurface;
+        }
+    }
+}
+

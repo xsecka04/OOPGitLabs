@@ -16,6 +16,9 @@
     <Folder Include="wwwroot\img\" />
     <Folder Include="Pages\Lab4_Classes\" />
     <Folder Include="Pages\Lab5_Classes\" />
+    <Folder Include="Pages\Lab6_Classes\" />
+    <Folder Include="Pages\Lab6_Classes\Obj2D\" />
+    <Folder Include="Pages\Lab6_Classes\Obj3D\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\GitHub-Mark-32px.png" />
