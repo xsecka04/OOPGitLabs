@@ -9,12 +9,75 @@
     input[type=number] {
         -moz-appearance: textfield;
     }
+
+    #wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    #left {
+        flex: 0 0 65%;
+        margin-right: 10%;
+    }
+
+    #right {
+        flex: 1;
+    }
+
 </style>
 
 
 <h3>Lab 6</h3>
+<div id="wrapper">
+    <div id="left">
+        <EditForm Model="@m5" class="form-horizontal" style="">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Width/Radius</div>
+                </div>
+                <input @bind="m5.no1" class="form-control" placeholder="Insert Real number" />
+            </div>
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Height (if applicable)</div>
+                </div>
+                <input @bind="m5.no2" class="form-control" placeholder="Insert Real number" />
+            </div>
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Depth (if applicable)</div>
+                </div>
+                <input @bind="m5.no3" class="form-control" placeholder="Insert Real number" />
+            </div>
+            <br>
+        </EditForm>
+    </div>
 
+    <div id="right">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle mx-auto" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Object
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Kruh(m5.no1))">Kruh</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Elipsa(m5.no1, m5.no2))">Elipsa</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Obdelnik(m5.no1, m5.no2))">Obdelnik</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Trojuhelnik(m5.no1, m5.no2))">Trojuhelnik</button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Koule(m5.no1))">Koule</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Jehlan(m5.no1, m5.no2))">Jehlan</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Valec(m5.no1, m5.no2))">Valec</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Kvadr(m5.no1, m5.no2, m5.no3))">Kvadr</button>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
 
 
 <ul class="list-group">
@@ -28,6 +91,7 @@
     @((MarkupString)m5.CalcTotalArea())
 </div>
 
+
 @code {
 
     KresliModel m5 = new KresliModel();
@@ -35,12 +99,15 @@
     public class KresliModel
     {
 
+        public double no1 { get; set; }
+        public double no2 { get; set; }
+        public double no3 { get; set; }
+
         public List<GrObjekt> objList = new List<GrObjekt>();
 
         public KresliModel()
         {
-            this.objList.Add(new Koule(5));
-            this.objList.Add(new Jehlan(10, 2));
+
         }
 
         public String CalcTotalArea()
@@ -60,7 +127,7 @@
                 }
             }
 
-            return "Total objects parameters are: <br>Total Area: " + totalArea + "<br>Total Volume: " + totalVolume + "<br>Total Surface: " + totalSurface;
+            return "Total Area: " + totalArea + "<br>Total Volume: " + totalVolume + "<br>Total Surface: " + totalSurface;
         }
     }
 }
