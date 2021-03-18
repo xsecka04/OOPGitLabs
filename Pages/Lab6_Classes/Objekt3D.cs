@@ -1,7 +1,7 @@
 ﻿using System;
 namespace OOPGitLabs.Pages.Lab6_Classes
 {
-    public class Objekt3D : GrObjekt
+    public abstract class Objekt3D : GrObjekt
     {
         public Objekt3D()
         {

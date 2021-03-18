@@ -127,7 +127,8 @@
                 }
             }
 
-            return "Total Area: " + totalArea + "<br>Total Volume: " + totalVolume + "<br>Total Surface: " + totalSurface;
+            return String.Format("Total Area: {0:0.00} <br>Total Volume: {1:0.00} <br>Total Surface: {2:0.00}", totalArea, totalVolume, totalSurface);
+
         }
     }
 }
