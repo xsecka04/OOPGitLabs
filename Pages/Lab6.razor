@@ -5,7 +5,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
-
+    
     input[type=number] {
         -moz-appearance: textfield;
     }
@@ -61,10 +61,10 @@
                 Select Object
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Kruh(m5.no1))">Kruh</button>
-                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Elipsa(m5.no1, m5.no2))">Elipsa</button>
-                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Obdelnik(m5.no1, m5.no2))">Obdelnik</button>
-                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Trojuhelnik(m5.no1, m5.no2))">Trojuhelnik</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Pages.Lab6_Classes.Kruh(m5.no1))">Kruh</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Pages.Lab6_Classes.Elipsa(m5.no1, m5.no2))">Elipsa</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Pages.Lab6_Classes.Obdelnik(m5.no1, m5.no2))">Obdelnik</button>
+                <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Pages.Lab6_Classes.Trojuhelnik(m5.no1, m5.no2))">Trojuhelnik</button>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Koule(m5.no1))">Koule</button>
                 <button class="dropdown-item" type="button" @onclick="() => m5.objList.Add(new Jehlan(m5.no1, m5.no2))">Jehlan</button>
@@ -118,8 +118,8 @@
 
             foreach (GrObjekt obj in objList)
             {
-                if (obj is Objekt2D)
-                    totalArea += ((Objekt2D)obj).SpoctiPlochu();
+                if (obj is Pages.Lab6_Classes.Objekt2D)
+                    totalArea += ((Pages.Lab6_Classes.Objekt2D)obj).SpoctiPlochu();
                 else
                 {
                     totalVolume += ((Objekt3D)obj).SpoctiObjem();

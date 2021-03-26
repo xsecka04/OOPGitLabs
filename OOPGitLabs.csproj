@@ -20,6 +20,7 @@
     <Folder Include="Pages\Lab6_Classes\" />
     <Folder Include="Pages\Lab6_Classes\Obj2D\" />
     <Folder Include="Pages\Lab6_Classes\Obj3D\" />
+    <Folder Include="Pages\Lab7_Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\GitHub-Mark-32px.png" />
