@@ -1,0 +1,117 @@
+﻿@page "/lab8"
+@using System.IO
+@using System.Text.RegularExpressions
+@using Lab8_Classes
+
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    #wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    #left {
+        flex: 0 0 65%;
+        margin-right: 10%;
+    }
+
+    #right {
+        flex: 1;
+    }
+</style>
+
+
+<h3>Lab 8</h3>
+
+
+<div class="drag-drop-zone">
+    <BlazorInputFile.InputFile OnChange="Load" />
+
+</div>
+
+@if (fileName != null)
+{
+    <h3>@fileName</h3>
+    <pre></pre>
+
+    <div class="alert alert-primary" role="alert">
+        @((MarkupString)arch.TiskTeplot())
+    </div>
+
+    <div class="alert alert-primary" role="alert">
+        @((MarkupString)arch.TiskPrumernychRocnichTeplot())
+    </div>
+
+    <div class="alert alert-primary" role="alert">
+        @((MarkupString)arch.TiskPrumernychMesicnichTeplot())
+    </div>
+
+
+}
+
+
+@code {
+    const string DefaultStatus = "Drop a text file here to view it, or click to choose a file";
+    const int MaxFileSize = 5 * 1024 * 1024; // 5MB
+    string status = DefaultStatus;
+
+    string fileName;
+    string fileTextContents;
+    string[] years;
+
+    int YearNo;
+    List<double> Temps;
+
+    ArchivTeplot arch;
+
+    async Task Load(IFileListEntry[] files)
+    {
+        var file = files.FirstOrDefault();
+        if (file == null)
+        {
+            return;
+        }
+        else if (file.Size > MaxFileSize)
+        {
+            status = $"Max size: {MaxFileSize} bytes.";
+        }
+        else
+        {
+            status = "Loading...";
+
+            using (var reader = new StreamReader(file.Data))
+            {
+                fileTextContents = await reader.ReadToEndAsync();
+                fileName = file.Name;
+
+                arch = new ArchivTeplot();
+
+                years = Regex.Split(fileTextContents, "[\r\n]+");
+
+                foreach (string year in years)
+                {
+                    YearNo = Int32.Parse(year.Split(':')[0]);
+                    Temps = year.Split(':')[1].Split(';').Select(s => Convert.ToDouble(s.Trim())).ToList();
+                    arch.archiv.Add(YearNo, new RocniTeplota(YearNo, Temps));
+                }
+
+                arch.Kalibrace(-0.1);
+
+            }
+
+            status = DefaultStatus;
+        }
+    }
+
+}
+
+

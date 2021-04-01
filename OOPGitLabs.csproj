@@ -10,6 +10,7 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.31" />
     <PackageReference Include="popper.js" Version="1.16.1" />
+    <PackageReference Include="BlazorInputFile" Version="0.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <Folder Include="Pages\Lab6_Classes\Obj2D\" />
     <Folder Include="Pages\Lab6_Classes\Obj3D\" />
     <Folder Include="Pages\Lab7_Classes\" />
+    <Folder Include="Pages\Lab8_Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\GitHub-Mark-32px.png" />
