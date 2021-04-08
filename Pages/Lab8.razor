@@ -1,8 +1,6 @@
 ﻿@page "/lab8"
 @using System.IO
 @using System.Text.RegularExpressions
-@using Lab8_Classes
-
 
 <style>
     input::-webkit-inner-spin-button {
@@ -14,45 +12,75 @@
         -moz-appearance: textfield;
     }
 
-    #wrapper {
+    .dropzone {
+        border: 3px dashed steelblue;
+        padding: 3rem;
         display: flex;
+        align-items: center;
         justify-content: center;
+        background-color: #eee;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+        color: #444;
+        font-size: 1.5rem;
+        cursor: pointer;
+        position: relative;
+        text-align: center;
     }
 
-    #left {
-        flex: 0 0 65%;
-        margin-right: 10%;
-    }
+        .dropzone:hover {
+            background-color: #f3f3f3;
+            color: #333;
+        }
 
-    #right {
-        flex: 1;
+        .dropzone input[type=file] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .dropzone-drag {
+        background-color: palegreen;
     }
 </style>
 
 
 <h3>Lab 8</h3>
+<EditForm Model="@m8" class="form-horizontal" style="">
+
+    <div class="dropzone @dropClass rounded">
+        <BlazorInputFile.InputFile OnChange="Load" @ondragenter="HandleDragEnter" @ondragleave="HandleDragLeave" />
+        <br>
+        @((MarkupString)status)
+
+        
+        @*@if (fileName != null) Getting ready for the calibration slider
+        {
+            <p>Calibraton offset: @m8.calibration</p>
+            <input @bind="@m8.calibration" type="range" class="custom-range" min="-2" max="2" step="0.1" id="customRange3">
+        }*@
 
 
-<div class="drag-drop-zone">
-    <BlazorInputFile.InputFile OnChange="Load" />
+    </div>
 
-</div>
+</EditForm>
+
+
 
 @if (fileName != null)
 {
     <h3>@fileName</h3>
-    <pre></pre>
-
     <div class="alert alert-primary" role="alert">
-        @((MarkupString)arch.TiskTeplot())
+        @((MarkupString)m8.arch.TiskTeplot())
     </div>
 
     <div class="alert alert-primary" role="alert">
-        @((MarkupString)arch.TiskPrumernychRocnichTeplot())
+        @((MarkupString)m8.arch.TiskPrumernychRocnichTeplot())
     </div>
 
     <div class="alert alert-primary" role="alert">
-        @((MarkupString)arch.TiskPrumernychMesicnichTeplot())
+        @((MarkupString)m8.arch.TiskPrumernychMesicnichTeplot())
     </div>
 
 
@@ -60,7 +88,22 @@
 
 
 @code {
-    const string DefaultStatus = "Drop a text file here to view it, or click to choose a file";
+
+    Model8 m8 = new Model8();
+
+    private string dropClass = "";
+
+    private void HandleDragEnter()
+    {
+        dropClass = "dropzone-drag";
+    }
+
+    private void HandleDragLeave()
+    {
+        dropClass = "";
+    }
+
+    const string DefaultStatus = "Drop your temperature data file here.<br>(YYYY: TEMP.DECIMAL;TEMP.DECIMAL)";
     const int MaxFileSize = 5 * 1024 * 1024; // 5MB
     string status = DefaultStatus;
 
@@ -71,7 +114,23 @@
     int YearNo;
     List<double> Temps;
 
-    ArchivTeplot arch;
+    class Model8
+    {
+
+        public ArchivTeplot arch = null;
+        //TODO Getting ready for the calibration slider
+        @*public double calibration
+        {
+            get { return calibration; }
+            set
+            {
+                if (arch is not null)
+                {
+                    arch.Kalibrace(value);
+                }
+            }
+        }*@
+    }
 
     async Task Load(IFileListEntry[] files)
     {
@@ -93,7 +152,7 @@
                 fileTextContents = await reader.ReadToEndAsync();
                 fileName = file.Name;
 
-                arch = new ArchivTeplot();
+                m8.arch = new ArchivTeplot();
 
                 years = Regex.Split(fileTextContents, "[\r\n]+");
 
@@ -101,12 +160,12 @@
                 {
                     YearNo = Int32.Parse(year.Split(':')[0]);
                     Temps = year.Split(':')[1].Split(';').Select(s => Convert.ToDouble(s.Trim())).ToList();
-                    arch.archiv.Add(YearNo, new RocniTeplota(YearNo, Temps));
+                    m8.arch.archiv.Add(YearNo, new RocniTeplota(YearNo, Temps));
                 }
 
-                arch.Kalibrace(-0.1);
-
+                m8.arch.Kalibrace(-0.1);
             }
+
 
             status = DefaultStatus;
         }
