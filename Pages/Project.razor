@@ -1,0 +1,99 @@
+﻿@page "/project"
+
+<style>
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    #wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    #left {
+        margin: auto;
+    }
+
+    #right {
+        flex: 1;
+    }
+</style>
+
+
+<h3>Complex Numbers Calculator</h3>
+
+<div id="wrapper">
+    <div>
+        <EditForm Model="@model" class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label">
+                    <InputText @bind-Value="model.Input" DisplayName="Input" class="form-control" placeholder="Format: x+yi || xe^iy" />
+                </label>
+            </div>
+        </EditForm>
+    </div>
+
+    <div>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle mx-auto" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Operation
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                @try
+                {
+                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.plus)">+</button>
+                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.minus)">-</button>
+                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.mult)">*</button>
+                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.divide)">/</button>
+                }
+                catch
+                {
+                    <div class="alert alert-danger" role="alert" style="text-align:right">
+                        The input format is not correct. Use available formats x+yi or xe^iy
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="list-group" style="text-align:right">
+    @foreach (Tuple<Project_Classes.Complex, Operator> num in model.numbers)
+    {
+        <li class="list-group-item">
+            @((char)num.Item2)
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            @num.Item1.ToString()
+        </li>
+    }
+</ul>
+
+<button class="btn btn-primary" @onclick="() => model.Calculate()">Calculate Result</button>
+<button class="btn btn-primary" @onclick="() => model.Ans()">Ans</button>
+<button class="btn btn-primary" @onclick="() => model.Del()">Delete</button>
+
+
+@if (model.Output is not null)
+{
+    <div class="alert alert-primary" role="alert" style="text-align:right">
+        @model.Output.ToString()
+        <br>
+        @Parser.switchNotation(model.Output.ToString())
+    </div>
+}
+
+
+@code {
+
+    Model model = new Model();
+
+}
+
