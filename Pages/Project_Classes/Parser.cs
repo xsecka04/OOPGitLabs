@@ -38,7 +38,21 @@ namespace OOPGitLabs.Pages.Project_Classes
             Match match = algebraic.Match(input);
             double real = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
             double img = double.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
-            return String.Format("{0:0.000}e^i{1:0.000}", Math.Sqrt(Math.Pow(real, 2) + Math.Pow(img, 2)), Math.Atan(img / real));
+            double phi = Math.Atan(img / real);
+            double adjPhi;
+            if (phi < 0)
+            {
+                adjPhi = phi + Math.PI;
+            }
+            else if (phi > 0)
+            {
+                adjPhi = phi - Math.PI;
+            } else
+            {
+                adjPhi = phi;
+            }
+
+            return String.Format("{0:0.000}e^i{1:0.000}", Math.Sqrt(Math.Pow(real, 2) + Math.Pow(img, 2)), adjPhi);
 
         }
     }
