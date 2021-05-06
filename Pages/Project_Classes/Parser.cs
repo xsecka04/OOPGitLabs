@@ -8,7 +8,7 @@ namespace OOPGitLabs.Pages.Project_Classes
     {
 
         private static readonly Regex algebraic = new(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)\s*\+\s*([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)i");
-        private static readonly Regex exponential = new(@"([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)\s*e\^i\s*([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
+        private static readonly Regex exponential = new(@"([+]?\d+\.?\d*|[+]?\d*\.?\d+)\s*e\^i\s*([-+]?\d+\.?\d*|[-+]?\d*\.?\d+)");
 
         public static Complex Parse(string input)
         {
@@ -52,7 +52,7 @@ namespace OOPGitLabs.Pages.Project_Classes
                 adjPhi = phi;
             }
 
-            return String.Format("{0:0.000}e^i{1:0.000}", Math.Sqrt(Math.Pow(real, 2) + Math.Pow(img, 2)), adjPhi);
+            return String.Format("{0:0.000}e^i{1:0.000}", Math.Sqrt(Math.Pow(real, 2) + Math.Pow(img, 2)), Math.Abs(adjPhi));
 
         }
     }
