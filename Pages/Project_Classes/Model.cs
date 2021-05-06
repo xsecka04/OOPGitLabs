@@ -22,9 +22,17 @@ namespace OOPGitLabs.Pages.Project_Classes
 
         public string Input { get; set; }
         public Complex Output { get; set; } = null;
+        public int err;
         public void Add(string input, Operator op)
         {
-            numbers.Add(new Tuple<Complex, Operator>(Parser.Parse(input), op));
+            try {
+                numbers.Add(new Tuple<Complex, Operator>(Parser.Parse(input), op));
+                err = 0;
+            }
+            catch
+            {
+                err = 1;
+            }
         }
 
         public void Ans()

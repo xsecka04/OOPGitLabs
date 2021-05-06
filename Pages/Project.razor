@@ -46,24 +46,21 @@
                 Select Operation
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                @try
-                {
-                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.plus)">+</button>
-                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.minus)">-</button>
-                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.mult)">*</button>
-                    <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.divide)">/</button>
-                }
-                catch
-                {
-                    <div class="alert alert-danger" role="alert" style="text-align:right">
-                        The input format is not correct. Use available formats x+yi or xe^iy
-                    </div>
-
-                }
+                <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.plus)">+</button>
+                <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.minus)">-</button>
+                <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.mult)">*</button>
+                <button class="dropdown-item" type="button" @onclick="() => model.Add(model.Input, Operator.divide)">/</button>
             </div>
         </div>
     </div>
 </div>
+
+@if (model.err == 1)
+    {
+        <div class="alert alert-danger" role="alert" style="text-align:right">
+            The input format is not correct. Use available formats x+yi or xe^iy
+        </div>
+    }
 
 <ul class="list-group" style="text-align:right">
     @foreach (Tuple<Project_Classes.Complex, Operator> num in model.numbers)
